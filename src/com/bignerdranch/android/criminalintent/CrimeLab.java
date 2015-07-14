@@ -1,0 +1,47 @@
+package com.bignerdranch.android.criminalintent;
+
+import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.UUID;
+
+/**
+ * Created by Brian Casteel on 7/2/2015.
+ */
+public class CrimeLab {
+    private ArrayList<Crime> mCrimes;
+    private static CrimeLab sCrimeLab;
+    private Context mAppContext;
+
+    public static CrimeLab get(Context c) {
+        if (sCrimeLab == null){
+            sCrimeLab = new CrimeLab(c.getApplicationContext());
+        }
+        return sCrimeLab;
+    }
+
+    private CrimeLab(Context appContext){
+        mAppContext = appContext;
+        mCrimes = new ArrayList<Crime>();
+
+        // TODO This is dummy test code. Remove and make it real in the future.
+        for (int i = 0; i < 100; i++) {
+            Crime c = new Crime();
+            c.setTitle("Crime #" + i);
+            c.setSolved(i % 2 == 0);  // Every other one
+            mCrimes.add(c);
+        }
+    }
+
+    public ArrayList<Crime> getCrimes() {
+        return mCrimes;
+    }
+
+    public Crime getCrime(UUID id) {
+        for (Crime c : mCrimes){
+            if (c.getId().equals(id))
+                return c;
+        }
+        return null;
+    }
+}
