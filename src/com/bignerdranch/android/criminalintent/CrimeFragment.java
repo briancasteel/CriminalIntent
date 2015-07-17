@@ -1,7 +1,8 @@
 package com.bignerdranch.android.criminalintent;
 
+//import android.app.FragmentManager;
 //import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,7 +20,7 @@ import java.util.UUID;
 /**
  * Created by Brian Casteel on 6/24/2015.
  */
-public class CrimeFragment extends Fragment {
+public class CrimeFragment extends android.support.v4.app.Fragment {
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
@@ -62,15 +63,15 @@ public class CrimeFragment extends Fragment {
         mDateButton.setText(mCrime.getDate().toString());
         //mDateButton.setEnabled(false);
         mDateButton.setEnabled(true);
-        mDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getActivity()
-                        .getSupportFragmentManager();
-                DatePickerFragment dialog = new DatePickerFragmet();
-                dialog.show(fm, DIALOG_DATE);
-            }
-        });
+       mDateButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
+               //FragmentManager fm = getActivity().getFragmentManager();
+               DatePickerFragment dialog = new DatePickerFragment();
+               dialog.show(fm, DIALOG_DATE);
+           }
+       });
 
         mSolvedCheckBox = (CheckBox)v.findViewById(R.id.crime_solved);
         mSolvedCheckBox.setChecked(mCrime.isSolved());
