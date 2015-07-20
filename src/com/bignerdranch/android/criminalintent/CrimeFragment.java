@@ -1,7 +1,6 @@
 package com.bignerdranch.android.criminalintent;
 
-//import android.app.FragmentManager;
-//import android.app.Fragment;
+
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -20,7 +19,7 @@ import java.util.UUID;
 /**
  * Created by Brian Casteel on 6/24/2015.
  */
-public class CrimeFragment extends android.support.v4.app.Fragment {
+public class CrimeFragment extends Fragment {
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
