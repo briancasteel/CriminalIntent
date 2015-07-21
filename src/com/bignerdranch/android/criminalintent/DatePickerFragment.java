@@ -4,11 +4,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.support.v4.app.DialogFragment;
 
 /**
  * Created by Brian Casteel on 7/16/2015.
  */
-public class DatePickerFragment extends android.support.v4.app.DialogFragment {
+public class DatePickerFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
