@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -60,14 +61,12 @@ public class CrimeFragment extends Fragment {
 
         mDateButton = (Button)v.findViewById((R.id.crime_date));
         mDateButton.setText(mCrime.getDate().toString());
-        //mDateButton.setEnabled(false);
         mDateButton.setEnabled(true);
-       mDateButton.setOnClickListener(new View.OnClickListener() {
+        mDateButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
-               //FragmentManager fm = getActivity().getFragmentManager();
-               DatePickerFragment dialog = new DatePickerFragment();
+               FragmentManager fm = getActivity().getSupportFragmentManager();
+               DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
                dialog.show(fm, DIALOG_DATE);
            }
        });
