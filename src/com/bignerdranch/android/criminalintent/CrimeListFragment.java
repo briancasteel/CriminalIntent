@@ -1,5 +1,6 @@
 package com.bignerdranch.android.criminalintent;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
  */
 public class CrimeListFragment extends ListFragment {
     private ArrayList<Crime> mCrimes;
+    private boolean mSubtitleVisible;
     private static final String TAG = "CrimeListFragment";
     private static final int REQUEST_CRIME = 1;
 
@@ -37,6 +39,9 @@ public class CrimeListFragment extends ListFragment {
 
         CrimeAdapter adapter = new CrimeAdapter(mCrimes);
         setListAdapter(adapter);
+
+        setRetainInstance(true);
+        mSubtitleVisible = false;
     }
 
     @Override
@@ -51,8 +56,10 @@ public class CrimeListFragment extends ListFragment {
         inflater.inflate(R.menu.fragment_crime_list, menu);
     }
 
+    @TargetApi(11)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        boolean ret;
         switch (item.getItemId()){
             case R.id.menu_item_new_crime:
                 Crime crime = new Crime();
@@ -60,10 +67,25 @@ public class CrimeListFragment extends ListFragment {
                 Intent i = new Intent(getActivity(), CrimePagerActivity.class);
                 i.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getId());
                 startActivityForResult(i, 0);
-                return true;
+                ret = true;
+                break;
+            case R.id.menu_item_show_subtitle:
+                if (getActivity().getActionBar().getSubtitle() == null) {
+                    getActivity().getActionBar().setSubtitle(R.string.subtitle);
+                    mSubtitleVisible = true;
+                    item.setTitle(R.string.hide_subtitle);
+                } else {
+                    getActivity().getActionBar().setSubtitle(null);
+                    mSubtitleVisible = false;
+                    item.setTitle(R.string.show_subtitle);
+                }
+                ret = true;
+                break;
             default:
-                return super.onOptionsItemSelected(item);
+                ret = super.onOptionsItemSelected(item);
+                break;
         }
+        return ret;
     }
 
     @Override

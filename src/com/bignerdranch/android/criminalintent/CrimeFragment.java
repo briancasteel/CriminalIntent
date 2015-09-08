@@ -117,15 +117,17 @@ public class CrimeFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        boolean ret;
         switch (item.getItemId()){
             case android.R.id.home:
                 if (NavUtils.getParentActivityName(getActivity()) != null){
                     NavUtils.navigateUpFromSameTask(getActivity());
                 }
-                return true;
+                ret = true;
             default:
-                return super.onOptionsItemSelected(item);
+                ret = super.onOptionsItemSelected(item);
         }
+        return ret;
     }
 
     public static CrimeFragment newInstance(UUID crimeId){
