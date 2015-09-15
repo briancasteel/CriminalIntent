@@ -1,5 +1,6 @@
 package com.bignerdranch.android.criminalintent;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ import android.support.v4.view.ViewPager;
 public class CrimePagerActivity extends FragmentActivity {
 	private ViewPager mViewPager;
 	private ArrayList<Crime> mCrimes;
-	
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);

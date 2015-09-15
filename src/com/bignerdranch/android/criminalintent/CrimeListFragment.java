@@ -2,6 +2,7 @@ package com.bignerdranch.android.criminalintent;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
@@ -86,6 +87,20 @@ public class CrimeListFragment extends ListFragment {
                 break;
         }
         return ret;
+    }
+
+    @TargetApi(11)
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = super.onCreateView(inflater, container, savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+            if (mSubtitleVisible){
+                getActivity().getActionBar().setSubtitle(R.string.subtitle);
+            }
+        }
+
+        return v;
     }
 
     @Override
