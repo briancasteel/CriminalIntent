@@ -31,7 +31,7 @@ public class CriminalIntentJSONSerializer {
         // Write the file to disk
         Writer writer = null;
         try {
-            OutputStream out = mContext.openFileOutput((mFilename, Context.MODE_PRIVATE);
+            OutputStream out = mContext.openFileOutput(mFilename, Context.MODE_PRIVATE);
             writer = new OutputStreamWriter(out);
             writer.write(array.toString());
         } finally {
