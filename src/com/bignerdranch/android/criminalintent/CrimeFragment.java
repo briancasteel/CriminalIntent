@@ -119,8 +119,14 @@ public class CrimeFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        CrimeLab.get(getActivity()).saveCrimes();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        boolean ret;
+        boolean ret = false;
         switch (item.getItemId()){
             case android.R.id.home:
                 if (NavUtils.getParentActivityName(getActivity()) != null){
