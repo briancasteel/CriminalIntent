@@ -2,7 +2,7 @@ package com.bignerdranch.android.criminalintent;
 
 import android.annotation.TargetApi;
 import android.hardware.Camera;
-import android.hardware.camera2.CameraAccessException;
+//import android.hardware.camera2.CameraAccessException;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.support.v4.app.Fragment;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by BR026CA on 11/16/2015.
@@ -104,5 +105,21 @@ public class CrimeCameraFragment extends Fragment {
             mCamera.release();
             mCamera = null;
         }
+    }
+
+    /** A simple algorithm to get the largest size available. For a more
+     * robust versin, see CameraPreview.java in the ApiDemos
+     * sample app from Android.      */
+    private Size getBestSupportedSize(List<Size> sizes, int width, int height){
+        Size bestSize = sizes.get(0);
+        int largestArea = bestSize.getWidth() * bestSize.getHeight();
+        for (Size s : sizes) {
+            int area = s.getWidth() * s.getHeight();
+            if (area > largestArea) {
+                bestSize = s;
+                largestArea = area;
+            }
+        }
+        return bestSize;
     }
 }
