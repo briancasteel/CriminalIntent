@@ -2,12 +2,11 @@ package com.bignerdranch.android.criminalintent;
 
 import android.annotation.TargetApi;
 import android.hardware.Camera;
-//import android.hardware.camera2.CameraAccessException;
+import android.hardware.Camera.Size;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.util.Size;
 import android.view.*;
 import android.widget.Button;
 import android.support.v4.app.Fragment;
@@ -64,7 +63,8 @@ public class CrimeCameraFragment extends Fragment {
 
                 // The surface has changed size; update the camera preview size.
                 Camera.Parameters parameters = mCamera.getParameters();
-                Camera.Size s = null; // To be reset in the next section
+                Size s = getBestSupportedSize(parameters.getSupportedPreviewSizes(), width, height);
+
                 parameters.setPreviewSize(s.width, s.height);
                 mCamera.setParameters(parameters);
                 try {
@@ -108,13 +108,14 @@ public class CrimeCameraFragment extends Fragment {
     }
 
     /** A simple algorithm to get the largest size available. For a more
-     * robust versin, see CameraPreview.java in the ApiDemos
+     * robust version, see CameraPreview.java in the ApiDemos
      * sample app from Android.      */
     private Size getBestSupportedSize(List<Size> sizes, int width, int height){
         Size bestSize = sizes.get(0);
-        int largestArea = bestSize.getWidth() * bestSize.getHeight();
+
+        int largestArea = bestSize.width * bestSize.height;
         for (Size s : sizes) {
-            int area = s.getWidth() * s.getHeight();
+            int area = s.width * s.height;
             if (area > largestArea) {
                 bestSize = s;
                 largestArea = area;
