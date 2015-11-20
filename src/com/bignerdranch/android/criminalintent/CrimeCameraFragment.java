@@ -29,8 +29,8 @@ public class CrimeCameraFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime_camera, container, false);
 
-        Button takePictureButon = (Button)v.findViewById(R.id.crime_camera_takePictureButton);
-        takePictureButon.setOnClickListener(new View.OnClickListener(){
+        Button takePictureButton = (Button)v.findViewById(R.id.crime_camera_takePictureButton);
+        takePictureButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 getActivity().finish();
             }
